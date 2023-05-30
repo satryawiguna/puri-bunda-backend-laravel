@@ -16,9 +16,9 @@ class ListSearchDataRequest extends ListDataRequest
     public function prepareForValidation()
     {
         $this->merge([
-            'order_by' => ($this->has('order_by')) ? $this->input('order_by') : $this->_order_by,
-            'sort' => ($this->has('sort')) ? $this->input('sort') : $this->_sort,
-            'search' => ($this->has('search')) ? $this->input('search') : $this->_search
+            'order_by' => ($this->has('order_by')) ? $this->get('order_by') : $this->_order_by,
+            'sort' => ($this->has('sort')) ? $this->get('sort') : $this->_sort,
+            'search' => ($this->has('search')) ? $this->get('search') : $this->_search
         ]);
     }
 }

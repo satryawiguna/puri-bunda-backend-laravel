@@ -3,7 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\Core\Entities\BaseEntity;
-use App\Http\Requests\User\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 
 interface IUserRepository
 {

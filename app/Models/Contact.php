@@ -33,4 +33,9 @@ class Contact extends BaseEntity
     {
         return $this->morphTo();
     }
+
+    public function positions()
+    {
+        return $this->belongsToMany(Position::class, 'contact_positions', 'position_id');
+    }
 }

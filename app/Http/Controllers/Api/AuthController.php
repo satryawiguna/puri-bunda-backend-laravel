@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\Auth\LoginResource;
 use App\Services\Contracts\IUserService;
 
