@@ -23,9 +23,11 @@ class DatabaseSeeder extends Seeder
 
         DB::table('user_logs')->truncate();
         DB::table('users')->truncate();
+        DB::table('roles')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(UserLogSeeder::class);
 

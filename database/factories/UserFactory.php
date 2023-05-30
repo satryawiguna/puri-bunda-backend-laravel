@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -17,7 +18,10 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $role = (new Role())->where('slug', '=', 'employee')->first();
+
         return [
+            'role_id' => $role->id,
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
