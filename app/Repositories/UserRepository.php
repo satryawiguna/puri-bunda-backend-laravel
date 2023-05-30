@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Core\Entities\BaseEntity;
-use App\Http\Requests\User\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Contact;
 use App\Models\User;
 use App\Repositories\Contracts\IUserRepository;

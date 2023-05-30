@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Position;
 
 use App\Core\Requests\AuditableRequest;
 use App\Helper\Common;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class PositionStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,10 +16,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'username' => ['required', 'string', 'unique:users'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:6', 'confirmed'],
-            'password_confirmation' => ['required']
+            'title' => ['required', 'string']
         ];
 
         return Common::setRuleAuthor($rules, new AuditableRequest());

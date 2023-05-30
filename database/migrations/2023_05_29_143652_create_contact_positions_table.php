@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPositionsTable extends Migration
+class CreateContactPositionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserPositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_positions', function (Blueprint $table) {
-            $table->uuid('user_id', 36);
+        Schema::create('contact_positions', function (Blueprint $table) {
+            $table->uuid('contact_id', 36);
             $table->unsignedBigInteger('position_id', 20);
 
             $table->nullableTimestamps();
 
-            $table->unique(['user_id', 'position_id']);
+            $table->unique(['contact_id', 'position_id']);
         });
     }
 
@@ -30,6 +30,6 @@ class CreateUserPositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_positions');
+        Schema::dropIfExists('contact_positions');
     }
 }
