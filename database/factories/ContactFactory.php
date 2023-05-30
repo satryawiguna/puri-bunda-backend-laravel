@@ -23,7 +23,6 @@ class ContactFactory extends Factory
         return [
             'contactable_id' => $contactable::factory(),
             'contactable_type' => $contactable,
-            'type' => 'EMPLOYEE',
             'nick_name' => $this->faker->firstName(),
             'full_name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
             'created_by' => 'system'

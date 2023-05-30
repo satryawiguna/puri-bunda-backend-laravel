@@ -17,8 +17,6 @@ class CreateContactsTable extends Migration
             $table->uuid('id', 36)->primary();
 
             $table->uuidMorphs('contactable');
-            $table->enum('type', ['EMPLOYEE', 'PATIENT'])
-                ->default('EMPLOYEE');
 
             $table->unsignedBigInteger('unit_id')
                 ->nullable();
