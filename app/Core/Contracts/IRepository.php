@@ -12,6 +12,8 @@ interface IRepository
 
     public function findById(int | string $id): BaseEntity | null;
 
+    public function findOrNew(array $data): BaseEntity;
+
     public function create(FormRequest $request): BaseEntity;
 
     public function update(FormRequest $request): BaseEntity | null;

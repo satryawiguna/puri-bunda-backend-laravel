@@ -4,7 +4,7 @@ namespace App\Core\Requests;
 
 class ListSearchDataRequest extends ListDataRequest
 {
-    public string $_search = "";
+    private string | null $_search = null;
 
     public function rules()
     {

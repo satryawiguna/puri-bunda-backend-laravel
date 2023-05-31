@@ -4,9 +4,9 @@ namespace App\Core\Requests;
 
 class ListSearchPageDataRequest extends ListSearchDataRequest
 {
-    public int $_page = 1;
+    private int $_page = 1;
 
-    public int $_per_page = 10;
+    private int $_per_page = 10;
 
     public function rules()
     {

@@ -24,8 +24,7 @@ class UserLogFactory extends Factory
             'user_id' => $user::inRandomOrder()->get()->first()->id,
             'log_level' => 'INFO',
             'context' => 'Login',
-            'ipv4' => $this->faker->ipv4(),
-            'ipv6' => $this->faker->ipv6()
+            'ipv4' => $this->faker->ipv4()
         ];
     }
 

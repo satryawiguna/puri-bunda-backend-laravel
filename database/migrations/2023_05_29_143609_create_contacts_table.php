@@ -18,7 +18,9 @@ class CreateContactsTable extends Migration
 
             $table->uuidMorphs('contactable');
 
-            $table->unsignedBigInteger('unit_id')
+            $table->enum('type', ['EMPLOYEE', 'PATIENT']);
+
+            $table->unsignedSmallInteger('unit_id')
                 ->nullable();
             $table->foreign('unit_id')
                 ->references('id')
@@ -27,6 +29,7 @@ class CreateContactsTable extends Migration
 
             $table->string('nick_name')->nullable();
             $table->string('full_name')->nullable();
+            $table->date('join_date');
 
             $table->string('created_by');
             $table->string('updated_by')->nullable();

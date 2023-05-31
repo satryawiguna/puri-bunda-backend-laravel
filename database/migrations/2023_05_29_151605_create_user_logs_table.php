@@ -25,7 +25,6 @@ class CreateUserLogsTable extends Migration
             $table->string('log_level');
             $table->string('context');
             $table->string('ipv4');
-            $table->string('ipv6');
 
             $table->nullableTimestamps();
             $table->softDeletes();

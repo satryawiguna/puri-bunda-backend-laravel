@@ -18,10 +18,10 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $role = (new Role())->where('slug', '=', 'employee')->first();
+        $roles = (new Role())->where('slug', '!=', 'super-admin')->get();
 
         return [
-            'role_id' => $role->id,
+            'role_id' => $roles->random()->id,
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),

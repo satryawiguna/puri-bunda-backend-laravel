@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $role = (new Role())->where('slug', '=', 'ADMINISTRATOR')->first();
+        $role = (new Role())->where('slug', '=', 'super-admin')->first();
 
         $user = User::create([
             'role_id' => $role->id,
@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
         $user->contact()->create([
             'nick_name' => 'Satrya',
             'full_name' => 'Satrya Wiguna',
+            'join_date' => fake()->date(),
             'created_by' => 'system'
         ]);
 
