@@ -34,8 +34,10 @@ class UserRepository extends BaseRepository implements IUserRepository
         $user->save();
 
         $contact = new $this->_contact([
+            "type" => "EMPLOYEE",
             "full_name" => $request->full_name,
             "nick_name" => $request->nick_name,
+            "join_date" => $request->join_date,
         ]);
 
         $this->setAuditableInformationFromRequest($contact, $request);

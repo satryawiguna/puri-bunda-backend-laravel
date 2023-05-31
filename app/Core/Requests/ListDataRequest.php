@@ -6,9 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ListDataRequest extends FormRequest
 {
-    public string $_order_by = "created_at";
+    private string $_order_by = "created_at";
 
-    public string $_sort = "ASC";
+    private string $_sort = "ASC";
 
     public function rules()
     {

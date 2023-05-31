@@ -15,9 +15,10 @@ class RoleSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            ['title' => 'ADMINISTRATOR', 'slug' => 'administrator', 'created_by' => 'system'],
-            ['title' => 'EMPLOYEE', 'slug'=> 'employee', 'created_by' => 'system'],
-            ['title' => 'PATIENT', 'slug'=> 'patient', 'created_by' => 'system']
+            ['title' => 'SUPER ADMIN', 'slug' => 'super-admin', 'created_by' => 'system'],
+            ['title' => 'ADMIN', 'slug' => 'admin', 'created_by' => 'system'],
+            ['title' => 'RECEPTIONIST', 'slug'=> 'receptionist', 'created_by' => 'system'],
+            ['title' => 'CASHIER', 'slug'=> 'cashier', 'created_by' => 'system']
         ]);
     }
 }

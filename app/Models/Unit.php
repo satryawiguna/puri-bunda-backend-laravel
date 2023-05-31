@@ -25,4 +25,9 @@ class Unit extends BaseEntity
             ]
         ];
     }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'unit_id');
+    }
 }

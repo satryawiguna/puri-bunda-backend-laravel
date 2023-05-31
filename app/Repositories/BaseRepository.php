@@ -20,16 +20,25 @@ class BaseRepository implements IRepository
         $this->_model = $model;
     }
 
-    public function all(string $order = "id", string $sort = "asc"): Collection
+    public function all(string $orderBy = "id", string $sort = "asc"): Collection
     {
         return $this->_model
-            ->orderBy($order, $sort)
+            ->orderBy($orderBy, $sort)
             ->get();
     }
 
     public function findById(int | string $id): BaseEntity | null
     {
         return $this->_model->find($id);
+    }
+
+    public function findOrNew(array $data): BaseEntity
+    {
+        $model = $this->_model->firstOrNew($data);
+
+        $model->save();
+
+        return $model->fresh();
     }
 
     public function create(FormRequest $request): BaseEntity
