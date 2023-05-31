@@ -151,7 +151,7 @@ class ApiBaseController extends Controller
 
     protected function getListSearchJsonResponse(GenericListSearchResponse $response,
                                                  ?string $resource = null,
-                                                 ?array $meta = null,): JsonResponse {
+                                                 ?array $meta = null): JsonResponse {
         $metaInit = [
             "type" => $response->getType(),
             "code_status" => $response->getCodeStatus(),
@@ -172,7 +172,7 @@ class ApiBaseController extends Controller
 
     protected function getListSearchPageJsonResponse(GenericListSearchPageResponse $response,
                                                      ?string $resource = null,
-                                                     ?array $meta = null,): JsonResponse {
+                                                     ?array $meta = null): JsonResponse {
         $metaInit = array_merge([
             "type" => $response->getType(),
             "code_status" => $response->getCodeStatus(),

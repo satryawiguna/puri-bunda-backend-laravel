@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Core\Contracts\IRepository;
 use App\Core\Entities\BaseEntity;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -19,19 +20,72 @@ class BaseRepository implements IRepository
         $this->_model = $model;
     }
 
-    public function all(string $order = "id", string $sort = "asc"): Collection
+    public function all(string $orderBy = "id", string $sort = "asc"): Collection
     {
         return $this->_model
-            ->orderBy($order, $sort)
+            ->orderBy($orderBy, $sort)
             ->get();
     }
 
-    public function findById(int|string $id): BaseEntity|null
+    public function findById(int | string $id): BaseEntity | null
     {
         return $this->_model->find($id);
     }
 
-    protected function setAuditableInformationFromRequest(BaseEntity|array $entity, $request)
+    public function findOrNew(array $data): BaseEntity
+    {
+        $model = $this->_model->firstOrNew($data);
+
+        $model->save();
+
+        return $model->fresh();
+    }
+
+    public function create(FormRequest $request): BaseEntity
+    {
+        $model = $this->_model->fill($request->all());
+
+        $this->setAuditableInformationFromRequest($model, $request);
+
+        $model->save();
+
+        return $model->fresh();
+    }
+
+    public function update(FormRequest $request): BaseEntity | null
+    {
+        $model = $this->_model->find($request->id);
+
+        if (!$model) {
+            return null;
+        }
+
+        $this->setAuditableInformationFromRequest($model, $request);
+
+        $model->update($request->all());
+
+        return $model->fresh();
+    }
+
+    public function delete(int | string $id): BaseEntity | null
+    {
+        $model = $this->_model->find($id);
+
+        if (!$model) {
+            return null;
+        }
+
+        $model->delete();
+
+        return $model;
+    }
+
+    public function count(): int
+    {
+        return $this->_model::all()->count();
+    }
+
+    protected function setAuditableInformationFromRequest(BaseEntity | array $entity, $request)
     {
         if ($entity instanceof BaseEntity) {
             if (!$entity->getKey()) {
