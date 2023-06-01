@@ -7,6 +7,7 @@ use App\Core\Responses\GenericListResponse;
 use App\Core\Responses\GenericListSearchPageResponse;
 use App\Core\Responses\GenericListSearchResponse;
 use App\Core\Responses\GenericObjectResponse;
+use App\Core\Responses\IntegerResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
@@ -105,6 +106,26 @@ class ApiBaseController extends Controller
                 "code_status" => $response->getCodeStatus()
             ],
             "message" => $response->getMessageResponseWarningLatest()
+        ], $response->getCodeStatus());
+    }
+
+    protected function getIntegerJsonResponse(IntegerResponse $response,
+                                             ?array $meta = null): JsonResponse {
+
+        $metaInit = [
+            "type" => $response->getType(),
+            "code_status" => $response->getCodeStatus()
+        ];
+
+        if ($meta) {
+            $meta = array_merge($metaInit, $meta);
+        } else {
+            $meta = $metaInit;
+        }
+
+        return response()->json([
+            "meta" => $meta,
+            "result" => $response->result
         ], $response->getCodeStatus());
     }
 

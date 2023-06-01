@@ -8,6 +8,7 @@ use App\Core\Responses\GenericListResponse;
 use App\Core\Responses\GenericListSearchPageResponse;
 use App\Core\Responses\GenericListSearchResponse;
 use App\Core\Responses\GenericObjectResponse;
+use App\Core\Responses\IntegerResponse;
 use Illuminate\Support\Collection;
 
 interface IService
@@ -16,6 +17,8 @@ interface IService
                                        string $type,
                                        int $codeStatus,
                                        string|array $message = null);
+
+    public function setIntegerResponse(IntegerResponse $response, int $result, string $type, int $codeStatus): IntegerResponse;
 
     public function setGenericObjectResponse(GenericObjectResponse $response,
                                              BaseEntity|array|null $dto,

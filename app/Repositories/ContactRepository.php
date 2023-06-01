@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Core\Entities\BaseEntity;
 use App\Core\Requests\ListSearchPageDataRequest;
+use App\Http\Requests\Dashboard\DashboardRequest;
 use App\Http\Requests\Employee\EmployeeListSearchDataRequest;
 use App\Http\Requests\Employee\EmployeeStoreRequest;
 use App\Http\Requests\Employee\EmployeeUpdateRequest;
@@ -98,8 +99,22 @@ class ContactRepository extends BaseRepository implements IContactRepository
             $employee = $employee->whereBetween("join_date", [$request->join_date_start, $request->join_date_end]);
         }
 
-        return $employee->orderBy($request->order_by, $request->sort)
+        return $employee->where('type', 'EMPLOYEE')
+            ->orderBy($request->order_by, $request->sort)
             ->paginate($request->per_page, ['*'], 'page', $request->page);
+    }
+
+    public function allCountEmployee(DashboardRequest $request): int
+    {
+        $model = $this->_model;
+
+        if ($request->start_date && $request->end_date) {
+            $model = $model->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        return $model->where('type', 'EMPLOYEE')
+            ->get()
+            ->count();
     }
 
     public function createEmployee(EmployeeStoreRequest $request, int $unitId, array $positionIds): BaseEntity

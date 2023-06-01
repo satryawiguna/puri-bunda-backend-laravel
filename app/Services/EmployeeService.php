@@ -139,6 +139,32 @@ class EmployeeService extends BaseService implements IEmployeeService
         return $response;
     }
 
+    public function getAllCountEmployee(): GenericObjectResponse
+    {
+        $response = new GenericListSearchPageResponse();
+
+        try {
+
+        } catch (QueryException $ex) {
+            $this->setMessageResponse($response,
+                'ERROR',
+                HttpResponseType::BAD_REQUEST,
+                'Invalid query');
+
+            Log::error("Invalid query on " . __FUNCTION__ . "()", [$ex->getMessage()]);
+        } catch (Exception $ex) {
+            $this->setMessageResponse($response,
+                'ERROR',
+                HttpResponseType::INTERNAL_SERVER_ERROR,
+                'Something went wrong');
+
+            Log::error("Something went wrong on " . __FUNCTION__ . "()", [$ex->getMessage()]);
+        }
+
+        return $response;
+    }
+
+
     public function getEmployee(string $id): GenericObjectResponse
     {
         $response = new GenericObjectResponse();
