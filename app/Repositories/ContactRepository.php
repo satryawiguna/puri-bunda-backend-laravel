@@ -128,25 +128,23 @@ class ContactRepository extends BaseRepository implements IContactRepository
 
         $this->setAuditableInformationFromRequest($user, $request);
 
-        $user->save($user);
+        $user->save();
 
-        $model = $this->_model->fill([
+        $contact = $this->_model->fill([
             "type" => "EMPLOYEE",
-            "contactable_type" => $user::class,
-            "contactable_id" => $user->id,
             "unit_id" => $unitId,
             "nick_name" => $request->nick_name,
             "full_name" => $request->full_name,
             "join_date" => Carbon::createFromFormat('Y-m-d', $request->join_date)
         ]);
 
-        $this->setAuditableInformationFromRequest($model, $request);
+        $this->setAuditableInformationFromRequest($contact, $request);
 
-        $model->save();
+        $user->contact()->save($contact);
 
-        $model->positions()->attatch($positionIds);
+        $contact->positions()->attach($positionIds);
 
-        return $model->fresh();
+        return $contact->fresh();
     }
 
     public function updateEmployee(EmployeeUpdateRequest $request, int $unitId, array $positionIds): BaseEntity|null

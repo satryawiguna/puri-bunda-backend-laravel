@@ -164,7 +164,6 @@ class EmployeeService extends BaseService implements IEmployeeService
         return $response;
     }
 
-
     public function getEmployee(string $id): GenericObjectResponse
     {
         $response = new GenericObjectResponse();
@@ -240,7 +239,7 @@ class EmployeeService extends BaseService implements IEmployeeService
             Log::info("Create position was succeed");
         } catch (QueryException $ex) {
             DB::rollBack();
-
+dd($ex->getMessage());
             $this->setMessageResponse($response,
                 'ERROR',
                 HttpResponseType::BAD_REQUEST,

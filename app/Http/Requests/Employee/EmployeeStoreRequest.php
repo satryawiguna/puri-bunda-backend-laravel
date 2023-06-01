@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Employee;
 
+use App\Core\Requests\AuditableRequest;
+use App\Helper\Common;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EmployeeStoreRequest extends FormRequest
@@ -11,7 +13,7 @@ class EmployeeStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +23,9 @@ class EmployeeStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'nick_name' => ['required', 'string'],
             'full_name' => ['required', 'string'],
-            'type' => ['required', 'string'],
             'join_date' => ['required', 'date'],
 
             'unit' => ['required'],
@@ -35,5 +36,12 @@ class EmployeeStoreRequest extends FormRequest
             'password' => ['required', 'min:6', 'confirmed'],
             'password_confirmation' => ['required', 'min:6']
         ];
+
+        return Common::setRuleAuthor($rules, new AuditableRequest());
+    }
+
+    public function prepareForValidation()
+    {
+        Common::setRequestAuthor($this, new AuditableRequest());
     }
 }

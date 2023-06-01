@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Employee;
 
+use App\Core\Requests\AuditableRequest;
+use App\Helper\Common;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EmployeeUpdateRequest extends FormRequest
@@ -21,7 +23,7 @@ class EmployeeUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'id' => ['required'],
             'nick_name' => ['required', 'string'],
             'full_name' => ['required', 'string'],
@@ -35,5 +37,12 @@ class EmployeeUpdateRequest extends FormRequest
             'password' => ['required', 'min:6', 'confirmed'],
             'password_confirmation' => ['required', 'min:6']
         ];
+
+        return Common::setRuleAuthor($rules, new AuditableRequest());
+    }
+
+    public function prepareForValidation()
+    {
+        Common::setRequestAuthor($this, new AuditableRequest());
     }
 }

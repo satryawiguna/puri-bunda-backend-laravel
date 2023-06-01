@@ -41,6 +41,6 @@ class Contact extends BaseEntity
 
     public function positions()
     {
-        return $this->belongsToMany(Position::class, 'contact_positions', 'position_id');
+        return $this->belongsToMany(Position::class, 'contact_positions', 'contact_id', 'position_id');
     }
 }
