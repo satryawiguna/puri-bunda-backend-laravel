@@ -18,7 +18,7 @@ class CreateRolesTable extends Migration
             $table->string('title');
             $table->string('slug');
 
-            $table->string('created_by');
+            $table->string('created_by')->default('system');
             $table->string('updated_by')->nullable();
 
             $table->nullableTimestamps();

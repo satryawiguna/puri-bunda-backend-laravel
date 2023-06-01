@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
 
-            $table->string('created_by');
+            $table->string('created_by')->default('system');
             $table->string('updated_by')->nullable();
 
             $table->nullableTimestamps();

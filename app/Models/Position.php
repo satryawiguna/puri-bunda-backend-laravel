@@ -26,6 +26,6 @@ class Position extends BaseEntity
     }
 
     public function contacts() {
-        return $this->belongsToMany(Contact::class, 'contact_positions', 'contact_id');
+        return $this->belongsToMany(Contact::class, 'contact_positions', 'position_id', 'contact_id');
     }
 }

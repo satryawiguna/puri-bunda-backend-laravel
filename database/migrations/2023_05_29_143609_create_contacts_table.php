@@ -31,7 +31,7 @@ class CreateContactsTable extends Migration
             $table->string('full_name');
             $table->date('join_date')->nullable();
 
-            $table->string('created_by');
+            $table->string('created_by')->default('system');
             $table->string('updated_by')->nullable();
 
             $table->nullableTimestamps();
