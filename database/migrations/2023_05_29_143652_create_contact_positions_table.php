@@ -15,7 +15,7 @@ class CreateContactPositionsTable extends Migration
     {
         Schema::create('contact_positions', function (Blueprint $table) {
             $table->uuid('contact_id', 36);
-            $table->unsignedBigInteger('position_id', 20);
+            $table->unsignedSmallInteger('position_id');
 
             $table->nullableTimestamps();
 
