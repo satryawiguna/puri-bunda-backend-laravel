@@ -4,9 +4,11 @@ namespace App\Repositories;
 
 use App\Core\Entities\BaseEntity;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Dashboard\DashboardRequest;
 use App\Models\Contact;
 use App\Models\User;
 use App\Repositories\Contracts\IUserRepository;
+use Illuminate\Support\Collection;
 
 class UserRepository extends BaseRepository implements IUserRepository
 {
@@ -36,8 +38,7 @@ class UserRepository extends BaseRepository implements IUserRepository
         $contact = new $this->_contact([
             "type" => "EMPLOYEE",
             "full_name" => $request->full_name,
-            "nick_name" => $request->nick_name,
-            "join_date" => $request->join_date,
+            "nick_name" => $request->nick_name
         ]);
 
         $this->setAuditableInformationFromRequest($contact, $request);
@@ -47,4 +48,24 @@ class UserRepository extends BaseRepository implements IUserRepository
         return $user->fresh();
     }
 
+    public function topTenUserByLogin(DashboardRequest $request): Collection
+    {
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+
+        $model = $this->_model
+            ->with('userLogs')
+            ->get();
+
+        if ($request->start_date && $request->end_date) {
+            return $model->sortBy(function($q) use ($startDate, $endDate) {
+                return $q->userLogs->whereBetween('created_at', [$startDate, $endDate])
+                    ->count();
+            })->slice(0, 10);
+        }
+
+        return $model->sortBy(function($q) {
+            return $q->userLogs->count();
+        })->slice(0, 10);
+    }
 }

@@ -9,6 +9,7 @@ use App\Core\Responses\GenericListResponse;
 use App\Core\Responses\GenericListSearchPageResponse;
 use App\Core\Responses\GenericListSearchResponse;
 use App\Core\Responses\GenericObjectResponse;
+use App\Core\Responses\IntegerResponse;
 use Illuminate\Support\Collection;
 
 class BaseService implements IService
@@ -36,6 +37,16 @@ class BaseService implements IService
 
         return $response;
     }
+
+    public function setIntegerResponse(IntegerResponse $response, int $result, string $type, int $codeStatus): IntegerResponse
+    {
+        $response->result = $result;
+        $response->type = $type;
+        $response->codeStatus = $codeStatus;
+
+        return $response;
+    }
+
 
     public function setGenericObjectResponse(GenericObjectResponse $response,
                                              BaseEntity|array|null $dto,

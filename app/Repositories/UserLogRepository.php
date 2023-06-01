@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Core\Entities\BaseEntity;
+use App\Http\Requests\Dashboard\DashboardRequest;
 use App\Http\Requests\UserLog\UserLogStoreRequest;
 use App\Models\UserLog;
 use App\Repositories\Contracts\IUserLogRepository;
@@ -22,4 +23,19 @@ class UserLogRepository extends BaseRepository implements IUserLogRepository
 
         return $model->fresh();
     }
+
+    public function allCountUserLog(DashboardRequest $request): int
+    {
+        $model = $this->_model;
+
+        if ($request->start_date && $request->end_date) {
+            $model = $model->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        return $model->where('context', '=', 'Login')
+            ->get()
+            ->count();
+    }
+
+
 }

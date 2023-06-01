@@ -21,8 +21,7 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'min:6', 'confirmed'],
             'password_confirmation' => ['required'],
             'nick_name' => ['required', 'string'],
-            'full_name' => ['required', 'string'],
-            'join_date' => ['required', 'date'],
+            'full_name' => ['required', 'string']
         ];
 
         return Common::setRuleAuthor($rules, new AuditableRequest());

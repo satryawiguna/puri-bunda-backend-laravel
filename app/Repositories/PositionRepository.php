@@ -44,6 +44,12 @@ class PositionRepository extends BaseRepository implements IPositionRepository
             ->paginate($request->per_page, ['*'], 'page', $request->page);
     }
 
+    public function allCountPosition(): int
+    {
+        return $this->_model->get()
+            ->count();
+    }
+
     private function searchPositionByKeyword(string $keyword) {
         return [
             'title' => "%" . $keyword . "%"

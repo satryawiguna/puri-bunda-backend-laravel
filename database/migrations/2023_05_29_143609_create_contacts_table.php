@@ -27,9 +27,9 @@ class CreateContactsTable extends Migration
                 ->on('units')
                 ->onDelete('restrict');
 
-            $table->string('nick_name')->nullable();
-            $table->string('full_name')->nullable();
-            $table->date('join_date');
+            $table->string('nick_name');
+            $table->string('full_name');
+            $table->date('join_date')->nullable();
 
             $table->string('created_by');
             $table->string('updated_by')->nullable();

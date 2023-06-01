@@ -44,6 +44,12 @@ class UnitRepository extends BaseRepository implements IUnitRepository
             ->paginate($request->per_page, ['*'], 'page', $request->page);
     }
 
+    public function allCountUnit(): int
+    {
+        return $this->_model->get()
+            ->count();
+    }
+
     private function searchUnitByKeyword(string $keyword) {
         return [
             'title' => "%" . $keyword . "%"
