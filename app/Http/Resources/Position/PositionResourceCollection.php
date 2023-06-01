@@ -18,7 +18,9 @@ class PositionResourceCollection extends ResourceCollection
             return [
                 'id' => $value->id,
                 'title' => $value->title,
-                'slug' => $value->slug
+                'slug' => $value->slug,
+                'created_by' => $value->created_by,
+                'created_at' => $value->created_at,
             ];
         });
 
