@@ -9,6 +9,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('/', [EmployeeController::class, 'list'])->name('api.employee.list');
             Route::get('/search', [EmployeeController::class, 'listSearch'])->name('api.employee.list.search');
             Route::get('/search/page', [EmployeeController::class, 'listSearchPage'])->name('api.employee.list.search.page');
+            Route::get('/count', [EmployeeController::class, 'listCount'])->name('api.employee.list.count');
         });
         Route::get('/{id}', [EmployeeController::class, 'show'])->name('api.employee.show');
         Route::post('/', [EmployeeController::class, 'store'])->name('api.employee.create');

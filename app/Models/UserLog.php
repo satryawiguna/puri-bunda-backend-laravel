@@ -21,11 +21,15 @@ class UserLog extends BaseEntity
 
     public $incrementing = false;
 
-    public static function boot(){
+    public static function boot() {
         parent::boot();
 
         static::creating(function ($contact) {
             $contact->id = Str::uuid(36);
         });
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

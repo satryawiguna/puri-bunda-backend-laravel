@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\ContactRepository;
+use App\Repositories\Contracts\IContactRepository;
 use App\Repositories\Contracts\IPositionRepository;
 use App\Repositories\Contracts\IUnitRepository;
 use App\Repositories\Contracts\IUserLogRepository;
@@ -23,6 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IPositionRepository::class, PositionRepository::class);
         $this->app->bind(IUnitRepository::class, UnitRepository::class);
         $this->app->bind(IUserLogRepository::class, UserLogRepository::class);
+        $this->app->bind(IContactRepository::class, ContactRepository::class);
 
     }
 

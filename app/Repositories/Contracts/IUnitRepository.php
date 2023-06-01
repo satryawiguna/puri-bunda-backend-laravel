@@ -12,4 +12,6 @@ interface IUnitRepository
     public function allSearchUnits(ListSearchDataRequest $request): Collection;
 
     public function allSearchPageUnits(ListSearchPageDataRequest $request): LengthAwarePaginator;
+
+    public function allCountUnit(): int;
 }

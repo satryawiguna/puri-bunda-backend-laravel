@@ -12,4 +12,6 @@ interface IPositionRepository
     public function allSearchPositions(ListSearchDataRequest $request): Collection;
 
     public function allSearchPagePositions(ListSearchPageDataRequest $request): LengthAwarePaginator;
+
+    public function allCountPosition(): int;
 }

@@ -21,6 +21,8 @@ interface IEmployeeService
 
     public function getAllSearchPageEmployees(EmployeeListSearchPageDataRequest $request): GenericListSearchPageResponse;
 
+    public function getAllCountEmployee(): GenericObjectResponse;
+
     public function getEmployee(string $id): GenericObjectResponse;
 
     public function storeEmployee(EmployeeStoreRequest $request): GenericObjectResponse;
